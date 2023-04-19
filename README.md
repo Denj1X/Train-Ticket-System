@@ -1,2 +1,2 @@
 # Train-Ticket-System
-PAO Project
+PAO Project for a train ticket system
