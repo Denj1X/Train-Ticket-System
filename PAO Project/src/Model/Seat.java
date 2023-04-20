@@ -1,31 +1,37 @@
 package Model;
 
 public class Seat {
-    private int seatNumber;
-    private boolean available;
+    private Integer seatNumber;
+    private Integer coach;
     private Passenger passenger;
-    protected double fare;
 
-    public Seat(int seatNumber) {
-        this.seatNumber = seatNumber;
-        this.available = available;
-        this.fare = fare;
+    public Seat(Integer _seatNumber, Integer _coach, Passenger _passenger) {
+        super();
+        this.seatNumber = _seatNumber;
+        this.coach = _coach;
+        this.passenger = _passenger;
     }
 
-    public int getSeatNumber() {
+    public Seat(Integer _seatNumber, Integer _coach) {
+        super();
+        this.seatNumber = _seatNumber;
+        this.coach = _coach;
+    }
+
+    public Integer getSeatNumber() {
         return seatNumber;
     }
 
-    public void setSeatNumber(int seatNumber) {
+    public void setSeatNumber(Integer seatNumber) {
         this.seatNumber = seatNumber;
     }
 
-    public boolean isAvailable() {
-        return available;
+    public Integer getCoach() {
+        return coach;
     }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
+    public void setCoach(Integer coach) {
+        this.coach = coach;
     }
 
     public Passenger getPassenger() {
@@ -36,32 +42,7 @@ public class Seat {
         this.passenger = passenger;
     }
 
-    public double getFare() {
-        return fare;
-    }
-
-    public void setFare(double fare) {
-        this.fare = fare;
-    }
-
-    public boolean reserveSeat() {
-        if (available) {
-            available = false;
-            return true;
-        }
-        return false;
-    }
-
-    public boolean cancelSeat() {
-        if (!available) {
-            available = true;
-            passenger = null;
-            return true;
-        }
-        return false;
-    }
-
-    public Passenger getReservedPassenger() {
-        return passenger;
+    public Boolean isAvailable() {
+        return this.passenger == null;
     }
 }
