@@ -21,7 +21,7 @@ public class Train {
     }
 
     public void setTrainId(Integer trainId) {
-        TrainId = trainId;
+        this.TrainId = trainId;
     }
 
     public List<Coach> getCoaches() {
@@ -41,19 +41,19 @@ public class Train {
     }
 
     public void addCoach(Coach coach) {
-        coaches.add(coach);
+        this.coaches.add(coach);
     }
 
     public void removeCoach(Coach coach) {
-        coaches.remove(coach);
+        this.coaches.remove(coach);
     }
 
     public void addRoute(Route route) {
-        routes.add(route);
+        this.routes.add(route);
     }
 
     public void removeRoute(Route route) {
-        routes.remove(route);
+        this.routes.remove(route);
     }
 
     @Override
