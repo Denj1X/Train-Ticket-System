@@ -1,6 +1,5 @@
 package Model;
 
-import java.time.LocalDateTime;
 import java.util.*;
 public class Ticket {
 
@@ -11,18 +10,24 @@ public class Ticket {
     private Seat seat;
     private Passenger passenger;
     private Date dateOfJourney;
-    private static Integer numOfTicket;
+    private static Integer numOfTicket = 1;
 
-    public Ticket( String _source, String _destination, Coach _coach, Seat _seat, Passenger _passenger, Date _dateOfJourney) {
+    private Route route;
+    private Double fare;
+
+    public Ticket(String _source, String _destination, Coach _coach, Seat _seat, Passenger _passenger, Date _dateOfJourney, Route _route, Fare _fare) {
         super();
         this.ticketNumber = numOfTicket;
         numOfTicket++;
+
         this.source = _source;
         this.destination = _destination;
         this.coach = _coach;
         this.seat = _seat;
         this.passenger = _passenger;
         this.dateOfJourney = _dateOfJourney;
+        this.route = _route;
+        this.fare = _fare.calculateFare(_route, _coach);
     }
 
     public Integer getTicketNumber() {

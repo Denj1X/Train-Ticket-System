@@ -20,16 +20,16 @@ public class Fare {
         this.finalFare = 0.0;
     }
 
-    public double calculateFare(Route route, Coach coach, LocalDateTime travelTime) {
-        double distance = route.getDistance();
-        double duration = Duration.between((Temporal) route.getDepartureTime(), (Temporal) route.getArrivalTime()).toMinutes() / 60.0;
-        double classRate = coach.getClassRate();
+    public Double calculateFare(Route route, Coach coach) {
+        Double distance = route.getDistance();
+        Double duration = Duration.between((Temporal) route.getDepartureTime(), (Temporal) route.getArrivalTime()).toMinutes() / 60.0;
+        Double classRate = coach.getClassRate();
 
-        double distanceCost = distance * this.distanceRate;
-        double durationCost = duration * this.durationRate;
-        double classCost = classRate * this.baseFare;
+        Double distanceCost = distance * this.distanceRate;
+        Double durationCost = duration * this.durationRate;
+        Double classCost = classRate * this.baseFare;
 
-        double totalCost = distanceCost + durationCost + classCost;
+        Double totalCost = distanceCost + durationCost + classCost;
 
         if (this.discountRate > 0.0) {
             totalCost = totalCost - (totalCost * this.discountRate);
@@ -48,7 +48,7 @@ public class Fare {
         this.baseFare = baseFare;
     }
 
-    public double getDistanceRate() {
+    public Double getDistanceRate() {
         return this.distanceRate;
     }
 
@@ -56,7 +56,7 @@ public class Fare {
         this.distanceRate = distanceRate;
     }
 
-    public double getDurationRate() {
+    public Double getDurationRate() {
         return this.durationRate;
     }
 
@@ -64,7 +64,7 @@ public class Fare {
         this.durationRate = durationRate;
     }
 
-    public double getDiscountRate() {
+    public Double getDiscountRate() {
         return this.discountRate;
     }
 
@@ -72,7 +72,7 @@ public class Fare {
         this.discountRate = discountRate;
     }
 
-    public double getFinalFare() {
+    public Double getFinalFare() {
         return this.finalFare;
     }
 
