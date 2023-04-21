@@ -19,7 +19,7 @@ public class Seat {
     }
 
     public Integer getSeatNumber() {
-        return seatNumber;
+        return this.seatNumber;
     }
 
     public void setSeatNumber(Integer seatNumber) {
@@ -27,7 +27,7 @@ public class Seat {
     }
 
     public Integer getCoach() {
-        return coach;
+        return this.coach;
     }
 
     public void setCoach(Integer coach) {
@@ -35,7 +35,7 @@ public class Seat {
     }
 
     public Passenger getPassenger() {
-        return passenger;
+        return this.passenger;
     }
 
     public void setPassenger(Passenger passenger) {

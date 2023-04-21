@@ -26,7 +26,7 @@ public class Ticket {
     }
 
     public Integer getTicketNumber() {
-        return ticketNumber;
+        return this.ticketNumber;
     }
 
     public void setTicketNumber(Integer ticketNumber) {
@@ -34,7 +34,7 @@ public class Ticket {
     }
 
     public String getSource() {
-        return source;
+        return this.source;
     }
 
     public void setSource(String source) {
@@ -42,7 +42,7 @@ public class Ticket {
     }
 
     public String getDestination() {
-        return destination;
+        return this.destination;
     }
 
     public void setDestination(String destination) {
@@ -50,7 +50,7 @@ public class Ticket {
     }
 
     public Coach getCoach() {
-        return coach;
+        return this.coach;
     }
 
     public void setCoach(Coach coach) {
@@ -58,7 +58,7 @@ public class Ticket {
     }
 
     public Seat getSeat() {
-        return seat;
+        return this.seat;
     }
 
     public void setSeat(Seat seat) {
@@ -66,7 +66,7 @@ public class Ticket {
     }
 
     public Passenger getPassenger() {
-        return passenger;
+        return this.passenger;
     }
 
     public void setPassenger(Passenger passenger) {
@@ -74,7 +74,7 @@ public class Ticket {
     }
 
     public Date getDateOfJourney() {
-        return dateOfJourney;
+        return this.dateOfJourney;
     }
 
     public void setDateOfJourney(Date dateOfJourney) {

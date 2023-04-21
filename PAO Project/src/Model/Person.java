@@ -13,7 +13,7 @@ public class Person {
     }
 
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     public void setFirstName(String firstName) {
@@ -21,7 +21,7 @@ public class Person {
     }
 
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
 
     public void setLastName(String lastName) {
@@ -29,7 +29,7 @@ public class Person {
     }
 
     public Integer getAge() {
-        return age;
+        return this.age;
     }
 
     public void setAge(Integer age) {
@@ -39,9 +39,9 @@ public class Person {
     @Override
     public String toString() {
         return "Person{" +
-                "firstName='" + this.firstName + '\'' +
-                ", lastName='" + this.lastName + '\'' +
-                ", age=" + this.age +
+                "firstName='" + this.getFirstName() + '\'' +
+                ", lastName='" + this.getLastName() + '\'' +
+                ", age=" + this.getAge() +
                 '}';
     }
 }

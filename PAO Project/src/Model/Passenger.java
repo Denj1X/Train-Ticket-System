@@ -12,7 +12,7 @@ public class Passenger extends Person{
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -20,7 +20,7 @@ public class Passenger extends Person{
     }
 
     public String getContactNumber() {
-        return contactNumber;
+        return this.contactNumber;
     }
 
     public void setContactNumber(String contactNumber) {
@@ -28,7 +28,7 @@ public class Passenger extends Person{
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {

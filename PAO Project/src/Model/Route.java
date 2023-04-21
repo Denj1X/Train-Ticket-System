@@ -16,6 +16,7 @@ public class Route {
 
     public Route(Station _startStation, Station _endStation, Double _distance, Date _departureTime,
                  Date _arrivalTime, Train _train, List<Station> _stations) {
+        super();
         this.routeId = nextId;
         nextId++;
 
@@ -98,5 +99,19 @@ public class Route {
 
     public void removeStation(Station station) {
         this.stations.remove(station);
+    }
+
+    @Override
+    public String toString() {
+        return "Route{" +
+                "routeId=" + this.getRouteId() +
+                ", startStation=" + this.getStartStation() +
+                ", endStation=" + this.getEndStation() +
+                ", distance=" + this.getDistance() +
+                ", departureTime=" + this.getDepartureTime() +
+                ", arrivalTime=" + this.getArrivalTime() +
+                ", train=" + this.getTrain() +
+                ", stations=" + this.getStations() +
+                '}';
     }
 }

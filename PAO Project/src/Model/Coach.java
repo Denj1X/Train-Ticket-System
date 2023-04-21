@@ -6,8 +6,9 @@ public class Coach {
     private Integer coachNumber;
     private List<Seat> seats;
     private static Integer nextCoachNumber = 1;
+    private String classOfService;
 
-    public Coach(int numOfSeats) {
+    public Coach(int numOfSeats, String _class) {
         super();
         this.coachNumber = nextCoachNumber;
         nextCoachNumber++;
@@ -16,6 +17,7 @@ public class Coach {
         for(int i = 1; i <= numOfSeats; i++) {
             this.seats.add(new Seat(i, this.coachNumber));
         }
+        this.classOfService = _class;
     }
 
     public Integer getCoachNumber() {
@@ -47,11 +49,36 @@ public class Coach {
         return null;
     }
 
+    public String getClassOfService() {
+        return classOfService;
+    }
+
+    public void setClassOfService(String classOfService) {
+        this.classOfService = classOfService;
+    }
+
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
+    }
+
+    public Double getClassRate() {
+        switch(this.getClassOfService()) {
+            case "firstClass":
+                return 2.0;
+            case "businessClass":
+                return 1.5;
+            case "economyClass":
+                return 1.0;
+            default:
+                return 1.0;
+        }
+    }
+
     @Override
     public String toString() {
         return "Coach{" +
-                "coachNumber=" + coachNumber +
-                ", seats=" + seats +
+                "coachNumber=" + this.getCoachNumber() +
+                ", seats=" + this.getSeats() +
                 '}';
     }
 }
