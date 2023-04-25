@@ -6,6 +6,8 @@ public class Train {
     private Integer TrainId;
     private List<Coach> coaches;
     private List<Route> routes;
+
+    private List<Ticket> tickets;
     private static Integer nextId;
     public Train() {
         super();
@@ -14,6 +16,7 @@ public class Train {
 
         this.coaches = new ArrayList<>();
         this.routes = new ArrayList<>();
+        this.tickets = new ArrayList<>();
     }
 
     public Integer getTrainId() {
@@ -54,6 +57,22 @@ public class Train {
 
     public void removeRoute(Route route) {
         this.routes.remove(route);
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
+    public void addTicket(Ticket ticket) {
+        this.tickets.add(ticket);
+    }
+
+    public void removeTicket(Ticket ticket) {
+        this.tickets.remove(ticket);
     }
 
     @Override

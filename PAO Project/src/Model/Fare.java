@@ -11,13 +11,20 @@ public class Fare {
     private Double discountRate;
     private Double finalFare;
 
-    public Fare(Double _baseFare, Double _distanceRate, Double _durationRate, Double _discountRate) {
+    private Route route;
+
+    private Coach coach;
+
+    public Fare(Double _baseFare, Double _distanceRate,
+                Double _durationRate, Double _discountRate, Route _route, Coach _coach) {
         super();
         this.baseFare = _baseFare;
         this.distanceRate = _distanceRate;
         this.durationRate = _durationRate;
         this.discountRate = _discountRate;
         this.finalFare = 0.0;
+        this.route = _route;
+        this.coach = _coach;
     }
 
     public Double calculateFare(Route route, Coach coach) {
@@ -78,5 +85,21 @@ public class Fare {
 
     public void setFinalFare(double finalFare) {
         this.finalFare = finalFare;
+    }
+
+    public Route getRoute() {
+        return this.route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
+
+    public Coach getCoach() {
+        return this.coach;
+    }
+
+    public void setCoach(Coach coach) {
+        this.coach = coach;
     }
 }

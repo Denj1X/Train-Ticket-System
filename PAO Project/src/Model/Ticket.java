@@ -15,6 +15,8 @@ public class Ticket {
     private Route route;
     private Double fare;
 
+    private Fare fareTicket;
+
     public Ticket(String _source, String _destination, Coach _coach, Seat _seat, Passenger _passenger, Date _dateOfJourney, Route _route, Fare _fare) {
         super();
         this.ticketNumber = numOfTicket;
@@ -28,6 +30,7 @@ public class Ticket {
         this.dateOfJourney = _dateOfJourney;
         this.route = _route;
         this.fare = _fare.calculateFare(_route, _coach);
+        this.fareTicket = _fare;
     }
 
     public Integer getTicketNumber() {
@@ -84,6 +87,30 @@ public class Ticket {
 
     public void setDateOfJourney(Date dateOfJourney) {
         this.dateOfJourney = dateOfJourney;
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
+
+    public Double getFare() {
+        return fare;
+    }
+
+    public void setFare(Double fare) {
+        this.fare = fare;
+    }
+
+    public Fare getFareTicket() {
+        return fareTicket;
+    }
+
+    public void setFareTicket(Fare fareTicket) {
+        this.fareTicket = fareTicket;
     }
 
     @Override

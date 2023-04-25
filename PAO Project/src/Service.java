@@ -1,20 +1,9 @@
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.*;
-import java.time.LocalTime;
-import java.time.LocalDateTime;
+import Model.*;
 
-import Model.Coach;
-import Model.Fare;
-import Model.Intercity;
-import Model.BookingHistory;
-import Model.Route;
-import Model.Passenger;
-import Model.Station;
-import Model.Train;
-import Model.Seat;
-import Model.Ticket;
+import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class Service {
     private List<Ticket> tickets;
@@ -39,6 +28,7 @@ public class Service {
         Ticket ticket = new Ticket(_source, _destination, _coach, _seat, _passenger, _dateOfJourney, _route, _fare);
         this.tickets.add(ticket);
         return ticket;
+
     }
 
     // Method to cancel a train ticket
@@ -48,6 +38,55 @@ public class Service {
             BookingHistory bookingHistory = new BookingHistory(ticket.getPassenger(), "Cancelled");
         }
         return success;
+    }
+
+    // Method to check availability of seats
+    public List<Seat> checkSeatAvailability(Train train) {
+        List<Coach> coaches = train.getCoaches();
+        List<Seat> availableSeats = new ArrayList<>();
+        for (Coach coach : coaches) {
+            for(Seat seat: coach.getSeats()){
+                if(seat.isAvailable()) {
+                    availableSeats.add(seat);
+                }
+            }
+        }
+        return availableSeats;
+    }
+
+    //Method to check all stations for each route of a train
+    public List<List<Station>> StationsPerRoute(Train train) {
+        List <Route> routes = train.getRoutes();
+        List<List<Station>> stations = new ArrayList<>();
+        for(Route route: routes) {
+            List<Station> stations1 = route.getStations();
+            stations.add(stations1);
+        }
+        return stations;
+    }
+
+    // Method to modify passenger information
+    public void modifyPassengerInformation(Passenger passenger, String name, String email, String phone) {
+        passenger.setLastName(name);
+        passenger.setEmail(email);
+        passenger.setContactNumber(phone);
+    }
+
+    ///Method to list all ticket fares for a train
+    ///including sorting by the key of a pair
+    public List<Pair<Double, Fare>> ticketFares(Train train) {
+        List<Pair<Double, Fare>> fares = new ArrayList<>();
+        List<Ticket> tickets = train.getTickets();
+
+        for(Ticket ticket: tickets) {
+            Fare fare = ticket.getFareTicket();
+            Double price = fare.calculateFare(fare.getRoute(), fare.getCoach());
+            fares.add(new Pair<>(price, fare));
+            PairComparator<Double, Fare> comparator = new PairComparator<>();
+            Collections.sort(fares, comparator);
+        }
+
+        return fares;
     }
 
 
