@@ -89,5 +89,36 @@ public class Service {
         return fares;
     }
 
+    // Method to search for a specific train
+    public List<Train> searchTrain(Integer id) {
+        List<Train> result = new ArrayList<>();
+        for (Train train : this.trains) {
+            if (train.getTrainId().equals(id)) {
+                result.add(train);
+            }
+        }
+        return result;
+    }
 
+    // Method to get train route information
+    public List<Route> getTrainRoute(Train train) {
+        List<Route> trainRoutes = train.getRoutes();
+        return trainRoutes;
+    }
+
+    public void printTrainTicket(Ticket ticket) {
+        System.out.println(ticket.toString());
+    }
+
+    public void printTrainData(Train train) {
+        List<Route> trainRoutes = train.getRoutes();
+        for(Route route: trainRoutes) {
+            System.out.println(route.toString());
+        }
+
+        this.coaches = train.getCoaches();
+        for(Coach coach: this.coaches) {
+            System.out.println(coach.toString());
+        }
+    }
 }

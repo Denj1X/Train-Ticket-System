@@ -116,13 +116,16 @@ public class Ticket {
     @Override
     public String toString() {
         return "Ticket{" +
-                "ticketNumber=" + this.getTicketNumber() +
-                ", source='" + this.getSource() + '\'' +
-                ", destination='" + this.getDestination() + '\'' +
-                ", coach=" + this.getCoach() +
-                ", seat=" + this.getSeat() +
-                ", passenger=" + this.getPassenger() +
-                ", dateOfJourney=" + this.getDateOfJourney() +
+                "ticketNumber=" + ticketNumber +
+                ", source='" + source + '\'' +
+                ", destination='" + destination + '\'' +
+                ", coach=" + coach +
+                ", seat=" + seat +
+                ", passenger=" + passenger +
+                ", dateOfJourney=" + dateOfJourney +
+                ", route=" + route +
+                ", fare=" + fare +
+                ", fareTicket=" + fareTicket +
                 '}';
     }
 }
