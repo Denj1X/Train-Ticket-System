@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 public class Coach {
     private Integer coachNumber;
+    private Integer seatNumbers;
     private List<Seat> seats;
     private static Integer nextCoachNumber = 1;
     private String classOfService;
 
-    public Coach(int numOfSeats, String _class) {
+    public Coach(Integer numOfSeats, String _class, Integer _seatNumbers) {
         super();
         this.coachNumber = nextCoachNumber;
         nextCoachNumber++;
@@ -18,6 +19,7 @@ public class Coach {
             this.seats.add(new Seat(i, this.coachNumber));
         }
         this.classOfService = _class;
+        this.seatNumbers = _seatNumbers;
     }
 
     public Integer getCoachNumber() {
@@ -72,6 +74,14 @@ public class Coach {
             default:
                 return 1.0;
         }
+    }
+
+    public Integer getSeatNumbers() {
+        return seatNumbers;
+    }
+
+    public void setSeatNumbers(Integer seatNumbers) {
+        this.seatNumbers = seatNumbers;
     }
 
     @Override

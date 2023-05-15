@@ -6,31 +6,40 @@ import java.util.Date;
 import java.util.List;
 
 public class Service {
-    private List<Ticket> tickets;
-    private List<BookingHistory> bookingHistories;
-    private List<Route> routes;
-    private List<Coach> coaches;
-    private List<Station> stations;
-    private List<Train> trains;
-
-    public Service() {
-        super();
-        this.tickets = new ArrayList<>();
-        this.bookingHistories = new ArrayList<>();
-        this.routes = new ArrayList<>();
-        this.coaches = new ArrayList<>();
-        this.stations = new ArrayList<>();
-        this.trains = new ArrayList<>();
-    }
+    private static List<Ticket> tickets;
+    private static List<BookingHistory> bookingHistories;
+    private static List<Route> routes;
+    private static List<Coach> coaches;
+    private static List<Station> stations;
+    private static List<Train> trains;
+    private static List<Passenger> passengers;
 
     // Method to book a train ticket
-    public Ticket bookTicket(String _source, String _destination, Coach _coach, Seat _seat, Passenger _passenger, Date _dateOfJourney, Route _route, Fare _fare) {
+    public static Ticket bookTicket(String _source, String _destination, Coach _coach, Seat _seat, Passenger _passenger, Date _dateOfJourney, Route _route, Fare _fare) {
         Ticket ticket = new Ticket(_source, _destination, _coach, _seat, _passenger, _dateOfJourney, _route, _fare);
-        this.tickets.add(ticket);
+        tickets.add(ticket);
         return ticket;
-
     }
 
+    //Method to create a new passenger
+    public static Passenger createPassenger(String _firstName, String _lastName, Integer _age, String _email, String _contactNumber, String _password) {
+        Passenger passenger = new Passenger(_firstName, _lastName, _age, _email, _contactNumber, _password);
+        passengers.add(passenger);
+        return passenger;
+    }
+
+    ///method for train creation
+    public Train createTrain() {
+        Train train = new Train();
+        this.trains.add(train);
+        return train;
+    }
+
+    public Coach createCoach(Integer numOfSeats, String _class, Integer _seatNumbers) {
+        Coach coach = new Coach(numOfSeats, _class, _seatNumbers);
+        this.coaches.add(coach);
+        return coach;
+    }
     // Method to cancel a train ticket
     public Boolean cancelTicket(Ticket ticket) {
         Boolean success = this.tickets.remove(ticket);
@@ -120,5 +129,12 @@ public class Service {
         for(Coach coach: this.coaches) {
             System.out.println(coach.toString());
         }
+    }
+
+    ///method for finding a passenger based on a given ticket
+    public void findPassengerInTrain(Ticket ticket) {
+        Passenger passenger = ticket.getPassenger();
+        Train train = ticket.getRoute().getTrain();
+        System.out.println("Pasagerul " + passenger + " se afla in trenul " + train);
     }
 }
