@@ -20,15 +20,15 @@ public class Main {
             System.out.println("3. Find a certain passenger in the system with the given last name and change some details");
             System.out.println("4. Choose a number for your train to check the stations for each route");
             System.out.println("5. Add a passenger with some certain details");
-            System.out.println("6. ");
-            System.out.println("7. ");
-            System.out.println("8. ");
+            System.out.println("6. Print the routes for a train");
+            System.out.println("7. Search a train by id");
+            System.out.println("8. Find the passenger for given train, coach and seat IDs");
             System.out.println("9. ");
             System.out.println("10. ");
-            System.out.println("11. ");
+            System.out.println("11. Find the available seats for a certain train by ID");
             System.out.println("12. ");
-            System.out.println("12. ");
-            System.out.println("14. ");
+            System.out.println("13. Using an train id, find different details, like routes or coaches");
+            System.out.println("14. Print all tickets a train has until that moment");
             System.out.println("15. ");
             System.out.println("16. Stop the program!");
 
@@ -97,15 +97,30 @@ public class Main {
                 }
 
                 case "6" -> {
-
+                    System.out.println("Enter a number: ");
+                    Integer id = scanner.nextInt();
+                    List<Route> routes = instance.getTrainRoute(id);
+                    for(Route route: routes) {
+                        System.out.println(route.toString());
+                    }
                 }
 
                 case "7" -> {
-
+                    System.out.println("Enter a number: ");
+                    Integer id = scanner.nextInt();
+                    List<Train> tren = instance.searchTrain(id);
+                    tren.toString();
                 }
 
                 case "8" -> {
+                    System.out.println("Enter train ID: ");
+                    Integer id_t = scanner.nextInt();
+                    System.out.println("Enter coach ID: ");
+                    Integer id_c = scanner.nextInt();
+                    System.out.println("Enter seat_id: ");
+                    Integer id_s = scanner.nextInt();
 
+                    instance.findPassengerInSeatNumber(id_t, id_c, id_s);
                 }
 
                 case "9" -> {
@@ -117,7 +132,12 @@ public class Main {
                 }
 
                 case "11" -> {
-
+                    System.out.println("Enter train ID: ");
+                    Integer id_t = scanner.nextInt();
+                    List<Seat> seats = instance.checkSeatAvailability(id_t);
+                    for(Seat seat: seats) {
+                        System.out.println(seat.toString() + "\n");
+                    }
                 }
 
                 case "12" -> {
@@ -125,11 +145,15 @@ public class Main {
                 }
 
                 case "13" -> {
-
+                    System.out.println("Enter a number: ");
+                    Integer number = scanner.nextInt();
+                    instance.printTrainData(number);
                 }
 
                 case "14" -> {
-
+                    System.out.println("Enter a number: ");
+                    Integer number = scanner.nextInt();
+                    instance.printTrainTickets(number);
                 }
 
                 case "15" -> {

@@ -45,4 +45,13 @@ public class Seat {
     public Boolean isAvailable() {
         return this.passenger == null;
     }
+
+    @Override
+    public String toString() {
+        return "Seat{" +
+                "seatNumber=" + seatNumber +
+                ", coach=" + coach +
+                ", passenger=" + passenger.toString() +
+                '}';
+    }
 }

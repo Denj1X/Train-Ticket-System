@@ -76,7 +76,13 @@ public class Service {
     }
 
     // Method to check availability of seats
-    public List<Seat> checkSeatAvailability(Train train) {
+    public List<Seat> checkSeatAvailability(Integer number) {
+        if(number >= trains.size()) {
+            System.out.println("Numar introdus gresit!");
+            return null;
+        }
+
+        Train train = trains.get(number);
         List<Coach> coaches = train.getCoaches();
         List<Seat> availableSeats = new ArrayList<>();
         for (Coach coach : coaches) {
@@ -137,7 +143,7 @@ public class Service {
     }
 
     // Method to search for a specific train
-    public static List<Train> searchTrain(Integer id) {
+    public List<Train> searchTrain(Integer id) {
         List<Train> result = new ArrayList<>();
         for (Train train : trains) {
             if (train.getTrainId().equals(id)) {
@@ -148,16 +154,35 @@ public class Service {
     }
 
     // Method to get train route information
-    public List<Route> getTrainRoute(Train train) {
+    public List<Route> getTrainRoute(Integer number) {
+        if(number >= trains.size()) {
+            System.out.println("Numar introdus gresit!");
+        }
+
+        Train train = trains.get(number);
         List<Route> trainRoutes = train.getRoutes();
         return trainRoutes;
     }
 
-    public void printTrainTicket(Ticket ticket) {
-        System.out.println(ticket.toString());
+    public void printTrainTickets(Integer number) {
+        if(number >= trains.size()) {
+            System.out.println("Numar introdus gresit!");
+        }
+
+        Train train = trains.get(number);
+        tickets = train.getTickets();
+
+        for(Ticket ticket: tickets) {
+            System.out.println(ticket.toString());
+        }
     }
 
-    public static void printTrainData(Train train) {
+    public void printTrainData(Integer number) {
+        if(number >= trains.size()) {
+            System.out.println("Numar introdus gresit!");
+        }
+
+        Train train = trains.get(number);
         List<Route> trainRoutes = train.getRoutes();
         for(Route route: trainRoutes) {
             System.out.println(route.toString());
@@ -170,10 +195,28 @@ public class Service {
     }
 
     ///method for finding a passenger based on a given ticket
-    public static void findPassengerInTrain(Ticket ticket) {
-        Passenger passenger = ticket.getPassenger();
-        Train train = ticket.getRoute().getTrain();
-        System.out.println("Pasagerul " + passenger + " se afla in trenul " + train);
+    public void findPassengerInSeatNumber(Integer idTren, Integer idCoach, Integer idSeat) {
+        if(idTren > trains.size()) {
+            System.out.println("Numar introdus gresit!");
+        }
+
+        Train tren = trains.get(idTren);
+        List<Coach> coaches1 = tren.getCoaches();
+
+        if(idCoach > coaches1.size()) {
+            System.out.println("Numar introdus gresit!");
+        }
+
+        Coach coach = coaches1.get(idCoach);
+        List<Seat> seats = coach.getSeats();
+
+        if(idSeat > seats.size()) {
+            System.out.println("Numar introdus gresit!");
+        }
+
+        Seat seat = seats.get(idSeat);
+        Passenger passenger = seat.getPassenger();
+        System.out.println(passenger.toString());
     }
 
     public static List<Train> getTrains() {
