@@ -2,13 +2,21 @@ package Model;
 
 import java.util.*;
 
-public class Train {
+interface Locomotiva {
+    final Integer capacitate_vagoane = 15;
+    final Double overall_power = 1500d;
+    Double putere(Integer panta);
+}
+public class Train implements Locomotiva {
     private Integer TrainId;
     private List<Coach> coaches;
     private List<Route> routes;
-
+    ///Map<Seat, Ticket>
     private List<Ticket> tickets;
     private static Integer nextId;
+
+    private Map<Seat, Ticket> asezare;
+
     public Train() {
         super();
         this.TrainId = nextId;
@@ -75,6 +83,31 @@ public class Train {
         this.tickets.remove(ticket);
     }
 
+    public Map<Seat, Ticket> getAsezare() {
+        return asezare;
+    }
+
+    public void setAsezare(Map<Seat, Ticket> asezare) {
+        this.asezare = asezare;
+    }
+
+    public Double putere(Integer panta) {
+        if(this.coaches.size() > 15) {
+            return -1d;
+        }
+
+        if(panta < 0) {
+            return overall_power - (this.coaches.size() + 1) * 25.15d * panta * 2.15d;
+        }
+
+        else if(panta == 0) {
+            return overall_power - (this.coaches.size() + 1) * 13.13d;
+        }
+
+        else {
+            return overall_power - (this.coaches.size() + 1) * 7.21d / panta * 2d;
+        }
+    }
     @Override
     public String toString() {
         return "Train{" +

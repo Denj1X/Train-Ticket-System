@@ -35,10 +35,6 @@ public class Passenger extends Person{
         this.password = password;
     }
 
-    public int hashPassword() {
-        return password.hashCode();
-    }
-
     @Override
     public String toString() {
         return "Passenger{" +
