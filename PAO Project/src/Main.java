@@ -17,9 +17,9 @@ public class Main {
         while(true) {
             System.out.println("1. Add a passenger in system");
             System.out.println("2. List all passengers of the system");
-            System.out.println("3. ");
-            System.out.println("4. ");
-            System.out.println("5. ");
+            System.out.println("3. Find a certain passenger in the system with the given last name and change some details");
+            System.out.println("4. Choose a number for your train to check the stations for each route");
+            System.out.println("5. Add a passenger with some certain details");
             System.out.println("6. ");
             System.out.println("7. ");
             System.out.println("8. ");
@@ -60,14 +60,39 @@ public class Main {
                 }
 
                 case "3" -> {
-
+                    System.out.println("Enter your surname: ");
+                    String surname = scanner.next();
+                    System.out.println("Enter your email: ");
+                    var email = scanner.next();
+                    System.out.println("Enter your phone: ");
+                    var phone = scanner.next();
+                    System.out.println("Enter the name you want to switch: ");
+                    var sname = scanner.next();
+                    instance.modifyPassengerInformation(surname, sname, email, phone);
                 }
 
                 case "4" -> {
-
+                    System.out.println("Enter the number: ");
+                    Integer nr = scanner.nextInt();
+                    List<List<Station>> routeStat = instance.StationsPerRoute(nr);
                 }
 
                 case "5" -> {
+                    System.out.println("Enter your name: ");
+                    String name = scanner.next();
+                    System.out.println("Enter your surname: ");
+                    String surname = scanner.next();
+                    System.out.println("Enter your age: ");
+                    Integer age = scanner.nextInt();
+                    System.out.println("Enter your email: ");
+                    var email = scanner.next();
+                    System.out.println("Enter your phone: ");
+                    var phone = scanner.next();
+                    System.out.println("Enter your password: ");
+                    String password = scanner.next();
+                    instance.createPassenger(name, surname, age, email, phone, password);
+                    System.out.println("Choose a train: ");
+                    Integer number = scanner.nextInt();
 
                 }
 

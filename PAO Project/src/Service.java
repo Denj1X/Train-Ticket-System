@@ -50,10 +50,15 @@ public class Service {
     }
 
     ///method for train creation
-    public static Train createTrain() {
-        Train train = new Train();
-        trains.add(train);
-        return train;
+    public void createTrain(Integer number) {
+        if(number > trains.size() + 1) {
+            System.out.println("Numar introdus gresit!");
+        }
+
+        else if(number.equals(trains.size() + 1)) {
+            Train train = new Train();
+            trains.add(train);
+        }
     }
 
     public static Coach createCoach(Integer numOfSeats, String _class, Integer _seatNumbers) {
@@ -85,8 +90,14 @@ public class Service {
     }
 
     //Method to check all stations for each route of a train
-    public List<List<Station>> StationsPerRoute(Train train) {
-        List <Route> routes = train.getRoutes();
+    public List<List<Station>> StationsPerRoute(Integer nr) {
+        if(nr > getTrains().size()) {
+            System.out.println("Numar introdus gresit!");
+            return null;
+        }
+
+        Train trenulet = getTrains().get(nr);
+        List <Route> routes = trenulet.getRoutes();
         List<List<Station>> stations = new ArrayList<>();
         for(Route route: routes) {
             List<Station> stations1 = route.getStations();
@@ -96,10 +107,16 @@ public class Service {
     }
 
     // Method to modify passenger information
-    public void modifyPassengerInformation(Passenger passenger, String name, String email, String phone) {
-        passenger.setLastName(name);
-        passenger.setEmail(email);
-        passenger.setContactNumber(phone);
+    public void modifyPassengerInformation(String _nume, String name, String email, String phone) {
+        List<Passenger> passengerList = getPassengers();
+        for(Integer i = 0; i < passengerList.size(); i++) {
+            Passenger pass = passengerList.get(i);
+            if(pass.getLastName() == _nume) {
+                pass.setLastName(name);
+                pass.setEmail(email);
+                pass.setContactNumber(phone);
+            }
+        }
     }
 
     ///Method to list all ticket fares for a train
@@ -157,5 +174,9 @@ public class Service {
         Passenger passenger = ticket.getPassenger();
         Train train = ticket.getRoute().getTrain();
         System.out.println("Pasagerul " + passenger + " se afla in trenul " + train);
+    }
+
+    public static List<Train> getTrains() {
+        return trains;
     }
 }
