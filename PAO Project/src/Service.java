@@ -24,10 +24,32 @@ public class Service {
         return Singleton.instance;
     }
     // Method to book a train ticket
-    public static Ticket bookTicket(String _source, String _destination, Coach _coach, Seat _seat, Passenger _passenger, Date _dateOfJourney, Route _route, Fare _fare) {
-        Ticket ticket = new Ticket(_source, _destination, _coach, _seat, _passenger, _dateOfJourney, _route, _fare);
+    public Ticket bookTicket(String _source, String _destination, Integer idTren, Integer idCoach, Integer idSeat, Passenger _passenger, Date _dateOfJourney, Route _route) {
+        if(idTren >= trains.size()) {
+            System.out.println("Numar introdus gresit!");
+            return null;
+        }
+
+        Train train = trains.get(idTren);
+        List<Coach> coaches1 = train.getCoaches();
+
+        if(idCoach > coaches1.size()) {
+            System.out.println("Numar introdus gresit!");
+        }
+
+        Coach coach = coaches1.get(idCoach);
+        List<Seat> seats = coach.getSeats();
+
+        if(idSeat > seats.size()) {
+            System.out.println("Numar introdus gresit!");
+        }
+
+        Seat seat = seats.get(idSeat);
+        Fare fare = new Fare(10d, 1.25d, 0.85d, 0.15d, _route, coach);
+        fare.calculateFare(_route, coach);
+        Ticket ticket = new Ticket(_source, _destination, coach, seat, _passenger, _dateOfJourney, _route, fare);
         tickets.add(ticket);
-        System.out.println("obiect creat");
+        System.out.println("Ticket created");
         return ticket;
     }
 
@@ -71,6 +93,7 @@ public class Service {
         Boolean success = tickets.remove(ticket);
         if(success) {
             BookingHistory bookingHistory = new BookingHistory(ticket.getPassenger(), "Cancelled");
+            System.out.println("Cancelled ticket");
         }
         return success;
     }
@@ -97,7 +120,7 @@ public class Service {
 
     //Method to check all stations for each route of a train
     public List<List<Station>> StationsPerRoute(Integer nr) {
-        if(nr > getTrains().size()) {
+        if(nr >= getTrains().size()) {
             System.out.println("Numar introdus gresit!");
             return null;
         }
@@ -115,9 +138,8 @@ public class Service {
     // Method to modify passenger information
     public void modifyPassengerInformation(String _nume, String name, String email, String phone) {
         List<Passenger> passengerList = getPassengers();
-        for(Integer i = 0; i < passengerList.size(); i++) {
-            Passenger pass = passengerList.get(i);
-            if(pass.getLastName() == _nume) {
+        for (Passenger pass : passengerList) {
+            if (pass.getLastName().equals(_nume)) {
                 pass.setLastName(name);
                 pass.setEmail(email);
                 pass.setContactNumber(phone);
@@ -127,7 +149,13 @@ public class Service {
 
     ///Method to list all ticket fares for a train
     ///including sorting by the key of a pair
-    public List<Pair<Double, Fare>> ticketFares(Train train) {
+    public List<Pair<Double, Fare>> ticketFares(Integer nr) {
+        if(nr >= trains.size()) {
+            System.out.println("Numar introdus gresit!");
+            return null;
+        }
+
+        Train train = trains.get(nr);
         List<Pair<Double, Fare>> fares = new ArrayList<>();
         List<Ticket> tickets = train.getTickets();
 
@@ -136,7 +164,7 @@ public class Service {
             Double price = fare.calculateFare(fare.getRoute(), fare.getCoach());
             fares.add(new Pair<>(price, fare));
             PairComparator<Double, Fare> comparator = new PairComparator<>();
-            Collections.sort(fares, comparator);
+            fares.sort(comparator);
         }
 
         return fares;
@@ -221,5 +249,13 @@ public class Service {
 
     public static List<Train> getTrains() {
         return trains;
+    }
+
+    public List<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(List<Route> routes) {
+        Service.routes = routes;
     }
 }

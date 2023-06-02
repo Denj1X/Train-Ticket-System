@@ -3,7 +3,7 @@ package Model;
 import java.util.*;
 
 interface Locomotiva {
-    final Integer capacitate_vagoane = 15;
+    final Integer numar_vagoane = 15;
     final Double overall_power = 1500d;
     Double putere(Integer panta);
 }
@@ -11,7 +11,6 @@ public class Train implements Locomotiva {
     private Integer TrainId;
     private List<Coach> coaches;
     private List<Route> routes;
-    ///Map<Seat, Ticket>
     private List<Ticket> tickets;
     private static Integer nextId;
 
@@ -25,6 +24,7 @@ public class Train implements Locomotiva {
         this.coaches = new ArrayList<>();
         this.routes = new ArrayList<>();
         this.tickets = new ArrayList<>();
+        this.asezare = new HashMap<>();
     }
 
     public Integer getTrainId() {

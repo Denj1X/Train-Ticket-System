@@ -22,4 +22,12 @@ public class Pair<L, R> {
     public void setKey(L key) {
         this.key = key;
     }
+
+    @Override
+    public String toString() {
+        return "Pair{" +
+                "key=" + key +
+                ", value=" + value +
+                '}';
+    }
 }

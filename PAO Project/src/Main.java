@@ -23,13 +23,13 @@ public class Main {
             System.out.println("6. Print the routes for a train");
             System.out.println("7. Search a train by id");
             System.out.println("8. Find the passenger for given train, coach and seat IDs");
-            System.out.println("9. ");
-            System.out.println("10. ");
+            System.out.println("9. Read again");
+            System.out.println("10. As a passenger, book a ticket");
             System.out.println("11. Find the available seats for a certain train by ID");
-            System.out.println("12. ");
+            System.out.println("12. Read again");
             System.out.println("13. Using an train id, find different details, like routes or coaches");
             System.out.println("14. Print all tickets a train has until that moment");
-            System.out.println("15. ");
+            System.out.println("15. As as user, find all fares for a train, with given ID");
             System.out.println("16. Stop the program!");
 
             var choice = scanner.next();
@@ -124,11 +124,28 @@ public class Main {
                 }
 
                 case "9" -> {
-
+                    System.out.println("9. Read again");
                 }
 
                 case "10" -> {
+                    System.out.println("Enter train ID: ");
+                    Integer id_t = scanner.nextInt();
+                    System.out.println("Enter coach ID: ");
+                    Integer id_c = scanner.nextInt();
+                    System.out.println("Enter seat_id: ");
+                    Integer id_s = scanner.nextInt();
+                    System.out.println("Enter source place: ");
+                    String source = scanner.next();
+                    System.out.println("Enter destination place: ");
+                    String destination = scanner.next();
 
+                    List<Passenger> passengers = instance.getPassengers();
+                    Passenger passenger = passengers.get(passengers.size() - 1);
+                    List<Route> routes = instance.getRoutes();
+                    Route route = routes.get(routes.size() - 1);
+                    java.util.Date date = new java.util.Date();
+                    Ticket ticket = instance.bookTicket(source, destination, id_t, id_c, id_s, passenger, date, route);
+                    System.out.println(ticket.toString());
                 }
 
                 case "11" -> {
@@ -141,7 +158,7 @@ public class Main {
                 }
 
                 case "12" -> {
-
+                    System.out.println("12. Read again");
                 }
 
                 case "13" -> {
@@ -157,7 +174,12 @@ public class Main {
                 }
 
                 case "15" -> {
-
+                    System.out.println("Enter a number: ");
+                    Integer number = scanner.nextInt();
+                    List<Pair<Double, Fare>> fares = instance.ticketFares(number);
+                    for(Pair<Double, Fare> fare: fares) {
+                        System.out.println(fare.toString());
+                    }
                 }
 
                 case "16" -> System.exit(0);
