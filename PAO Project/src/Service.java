@@ -1,9 +1,13 @@
 import Model.*;
+import com.sun.source.doctree.SinceTree;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.io.*;
 
 public class Service {
     private static List<Ticket> tickets = new ArrayList<>();
@@ -14,14 +18,32 @@ public class Service {
     private static List<Train> trains = new ArrayList<>();
     private static List<Passenger> passengers = new ArrayList<>();
 
-    private Service() {}
+    File audit = new File("audit.csv");
+    PrintWriter writer = null;
+
+    private Service() {
+        try {
+            writer = new PrintWriter(audit);
+            writer.flush();
+        } catch (IOException ex){
+            System.out.println("Can't create the audit file!");
+        }
+    }
 
     private static class Singleton {
+
         private static final Service instance = new Service();
     }
 
     public static Service getInstance() {
         return Singleton.instance;
+    }
+
+    private void makeAudit(String action){
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        writer.print(timestamp + ", ");
+        writer.println(action);
+        writer.flush();
     }
     // Method to book a train ticket
     public Ticket bookTicket(String _source, String _destination, Integer idTren, Integer idCoach, Integer idSeat, Passenger _passenger, Date _dateOfJourney, Route _route) {
@@ -49,6 +71,8 @@ public class Service {
         fare.calculateFare(_route, coach);
         Ticket ticket = new Ticket(_source, _destination, coach, seat, _passenger, _dateOfJourney, _route, fare);
         tickets.add(ticket);
+        String audit = "Ticket created";
+        makeAudit(audit);
         System.out.println("Ticket created");
         return ticket;
     }
@@ -115,6 +139,9 @@ public class Service {
                 }
             }
         }
+
+        String audit = "Available seats for a train";
+        makeAudit(audit);
         return availableSeats;
     }
 
@@ -132,6 +159,9 @@ public class Service {
             List<Station> stations1 = route.getStations();
             stations.add(stations1);
         }
+
+        String audit = "Stations for each route train";
+        makeAudit(audit);
         return stations;
     }
 
@@ -145,6 +175,9 @@ public class Service {
                 pass.setContactNumber(phone);
             }
         }
+
+        String audit = "Modify passenger information";
+        makeAudit(audit);
     }
 
     ///Method to list all ticket fares for a train
@@ -167,6 +200,8 @@ public class Service {
             fares.sort(comparator);
         }
 
+        String audit = "Sort and print fares";
+        makeAudit(audit);
         return fares;
     }
 
@@ -178,6 +213,9 @@ public class Service {
                 result.add(train);
             }
         }
+
+        String audit = "Search a train by id";
+        makeAudit(audit);
         return result;
     }
 
@@ -189,6 +227,9 @@ public class Service {
 
         Train train = trains.get(number);
         List<Route> trainRoutes = train.getRoutes();
+
+        String audit = "Route informations";
+        makeAudit(audit);
         return trainRoutes;
     }
 
@@ -203,6 +244,9 @@ public class Service {
         for(Ticket ticket: tickets) {
             System.out.println(ticket.toString());
         }
+
+        String audit = "Show tickets for a train";
+        makeAudit(audit);
     }
 
     public void printTrainData(Integer number) {
@@ -220,6 +264,9 @@ public class Service {
         for(Coach coach: coaches) {
             System.out.println(coach.toString());
         }
+
+        String audit = "Show train statistics";
+        makeAudit(audit);
     }
 
     ///method for finding a passenger based on a given ticket
@@ -245,6 +292,9 @@ public class Service {
         Seat seat = seats.get(idSeat);
         Passenger passenger = seat.getPassenger();
         System.out.println(passenger.toString());
+
+        String audit = "Finding passenger";
+        makeAudit(audit);
     }
 
     public static List<Train> getTrains() {
