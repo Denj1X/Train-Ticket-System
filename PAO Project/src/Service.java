@@ -1,6 +1,9 @@
 import Model.*;
-import com.sun.source.doctree.SinceTree;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -20,6 +23,7 @@ public class Service {
 
     File audit = new File("audit.csv");
     PrintWriter writer = null;
+    Connection conn = null;
 
     private Service() {
         try {
@@ -27,6 +31,13 @@ public class Service {
             writer.flush();
         } catch (IOException ex){
             System.out.println("Can't create the audit file!");
+        }
+
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/paoproject", "root", "root");
+            Statement statement = conn.createStatement();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
