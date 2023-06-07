@@ -23,10 +23,10 @@ public class Main {
             System.out.println("6. Print the routes for a train");
             System.out.println("7. Search a train by id");
             System.out.println("8. Find the passenger for given train, coach and seat IDs");
-            System.out.println("9. Read again");
+            System.out.println("9. Read passengers from database");
             System.out.println("10. As a passenger, book a ticket");
             System.out.println("11. Find the available seats for a certain train by ID");
-            System.out.println("12. Read again");
+            System.out.println("12. Update passenger by email");
             System.out.println("13. Using an train id, find different details, like routes or coaches");
             System.out.println("14. Print all tickets a train has until that moment");
             System.out.println("15. As as user, find all fares for a train, with given ID");
@@ -124,7 +124,7 @@ public class Main {
                 }
 
                 case "9" -> {
-                    System.out.println("9. Read again");
+                    instance.readPassenger();
                 }
 
                 case "10" -> {
@@ -158,7 +158,11 @@ public class Main {
                 }
 
                 case "12" -> {
-                    System.out.println("12. Read again");
+                    System.out.println("Enter your email: ");
+                    var email = scanner.next();
+                    System.out.println("Enter your phone: ");
+                    var phone = scanner.next();
+                    instance.updatePassenger(phone, email);
                 }
 
                 case "13" -> {
@@ -186,12 +190,7 @@ public class Main {
             }
             System.out.println("To end the program press 16");
         }
-//        Service.createPassenger("Andrei-Daniel", "Tava", 20, "andreiutz@gmail.com", "0777666777", "5t31n3rTr33S");
-//        Service.createPassenger("Petrik", "Simion", 20, "petricasimion@gmail.com", "0769776969", "M4t3y3st3l3n3s");
-//        Service.createPassenger("Robert", "Rosianu", 20, "rosianurobert@yahoo.com", "0745367507", "t4l3ntb1gb4g");
-//        Service.createPassenger("Tiberiu-Nicolae", "Titirga", 20, "titirisca@gmail.com", "0723665048", "b4h01iq102");
-//        Service.createPassenger("Andrei", "Lefter", 20, "andlft@gmail.com", "0775662702", "tR45h153k41");
-//        Service.createPassenger()
+//
         ///schema: Person -> Passenger
         ///Route -> Intercity
 

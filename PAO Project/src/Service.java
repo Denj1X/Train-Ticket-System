@@ -1,9 +1,6 @@
 import Model.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -24,6 +21,7 @@ public class Service {
     File audit = new File("audit.csv");
     PrintWriter writer = null;
     Connection conn = null;
+    Statement statement;
 
     private Service() {
         try {
@@ -35,7 +33,7 @@ public class Service {
 
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/paoproject", "root", "root");
-            Statement statement = conn.createStatement();
+            statement = conn.createStatement();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -93,12 +91,17 @@ public class Service {
         Passenger passenger = new Passenger(_firstName, _lastName, _age, _email, _contactNumber, _password);
         passengers.add(passenger);
         System.out.println("obiect creat de tip pasager");
+
+        String audit = "Creating passenger";
+        makeAudit(audit);
         return passenger;
     }
 
 
 
     public List<Passenger> getPassengers() {
+        String audit = "Printing passengers";
+        makeAudit(audit);
         return passengers;
     }
 
@@ -318,5 +321,42 @@ public class Service {
 
     public void setRoutes(List<Route> routes) {
         Service.routes = routes;
+    }
+
+    ///method for database part
+    public void readPassenger() {
+        String audit = "Reading passengers with JDBC";
+        makeAudit(audit);
+
+        String query = "SELECT * from passenger";
+        try {
+            ResultSet resultSet = statement.executeQuery(query);
+            while(resultSet.next()) {
+                System.out.println(resultSet.getString("Email") + " " + resultSet.getString("Password") + " " + resultSet.getString("contactNumber"));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void updatePassenger(String phone, String email) {
+        String audit = "Update passenger with JDBC";
+        makeAudit(audit);
+
+        for(Passenger passenger: passengers) {
+            if(passenger.getEmail().equals(email)) {
+                passenger.setContactNumber(phone);
+                break;
+            }
+        }
+
+        String query = "UPDATE `paoproject`.`passenger` " + "SET " +
+                "`contactNumber` = '" + phone + "' where `Email` = '" + email + "'";
+        try {
+            statement.execute(query);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
     }
 }
